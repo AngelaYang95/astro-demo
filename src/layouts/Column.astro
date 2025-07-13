@@ -1,0 +1,15 @@
+---
+interface Props {
+  gridColumn?: string;
+}
+
+const {gridColumn = "span 6"} = Astro.props;
+---
+<div class="column">
+    <slot />
+</div>
+<style define:vars={{ gridColumn }}>
+    .column {
+        grid-column: var(--gridColumn);
+    }
+</style>

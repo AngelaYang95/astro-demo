@@ -1,0 +1,16 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import BaseHeading from '../components/BaseHeading.astro';
+import SliceGrid from '../layouts/SliceGrid.astro';
+import Column from '../layouts/Column.astro';
+
+const { blok } = Astro.props;
+console.log(blok);
+---
+
+<SliceGrid {...storyblokEditable(blok)}>
+    <Column>
+        <BaseHeading heading={blok.headline[0].text} subheading={blok.text} eyebrow={blok.eyebrow} />
+    </Column>
+</SliceGrid>

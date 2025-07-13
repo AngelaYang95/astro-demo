@@ -1,11 +1,29 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Welcome from '../components/Welcome.astro';
+import BaseHeading from '../components/BaseHeading.astro';
+import SliceGrid from '../layouts/SliceGrid.astro';
+import Column from '../layouts/Column.astro';
+import {Button} from '../components/Button';
+import { useStoryblokApi } from '@storyblok/astro'
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const storyblokApi = useStoryblokApi()
+
+const { data } = await storyblokApi.get("cdn/stories/demo", {
+  version: import.meta.env.DEV ? "draft" : "published",
+});
+
+const content = data.story.content;
 ---
-
 <Layout>
-	<Welcome />
+	<StoryblokComponent blok={content} />
+	<SliceGrid>
+		<Column>
+			<BaseHeading heading="Think bigger.\nBuild faster." subheading="Figma helps design and development teams build great products, together."
+			maxSubheadingWidth={500}	
+			primaryCta={{label: "Get started for free"}} secondaryCta={{label: "Contact sales"}}
+			/>
+		</Column>
+	</SliceGrid>
 </Layout>
