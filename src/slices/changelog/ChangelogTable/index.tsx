@@ -7,6 +7,7 @@ interface ChangelogStory {
   name: string;
   updated_at: string;
   content: any;
+  slug: string;
 }
 
 interface ChangelogTableProps {
@@ -38,7 +39,7 @@ export const ChangelogTable: React.FC<ChangelogTableProps> = ({
             }
             onMouseEnter={(e) => handleMouseOver(e, index)}
             onMouseLeave={handleMouseLeave}
-            href="#"
+            href={"/changelogs/" + changelog.slug}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <span className={date}>{changelog.updated_at}</span>

@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLiveStory, useStoryblokApi } from '@storyblok/astro';
+import SliceGrid from '../../layouts/SliceGrid.astro';
+import Column from '../../layouts/Column.astro';
+import Spacer from '../../layouts/Spacer.astro';
+import { renderRichText } from '@storyblok/astro';
+
+// Write a helper for this.
+const { changelog } = Astro.params;
+let story = null;
+console.log("slug", changelog);
+
+const liveStory = await getLiveStory(Astro);
+if (liveStory) {
+  story = liveStory;
+} else {
+  const sbApi = useStoryblokApi();
+  const { data } = await sbApi.get(`cdn/stories/changelogs/${changelog}`, {
+    version: 'draft',
+  });
+  story = data?.story;
+}
+
+const content = story.content;
+const renderedHtml = renderRichText(content.content);
+---
+<Layout>
+    <Spacer />
+    <SliceGrid>
+        <Column gridColumn='span 7'>
+        {
+            <h1 class="heading">{content.title}</h1>
+            <Spacer size={24}/>
+            <div set:html={renderedHtml}></div>
+        }
+        </Column>
+    </SliceGrid>
+	<Spacer />
+</Layout>
+<style lang="scss">
+    @import '../../styles/mixins.scss';
+    .heading {
+        margin-bottom: 16px;
+        @include H56;
+    }
+</style>
