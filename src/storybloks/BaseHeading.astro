@@ -1,0 +1,45 @@
+---
+import SliceGrid from '../layouts/SliceGrid.astro';
+import Column from '../layouts/Column.astro';
+
+interface Props {
+    eyebrow?: string;
+    text?: string;
+    subheading?: string;
+    maxSubheadingWidth?: number;
+}
+const colorTextSecondary = "rgba(10, 10, 10, 0.6)";
+const {eyebrow, text, subheading, maxSubheadingWidth = 800} = Astro.props.blok;
+---
+<SliceGrid>
+    <Column gridColumn='span 3'>
+        {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    </Column>
+    <Column gridColumn='span 9'>
+        {text && <h2 class="heading">{text}</h2>}
+        {subheading && <p class="subheading">{subheading}</p>}
+    </Column>
+</SliceGrid>
+
+<style lang="scss" define:vars={{ maxSubheadingWidth, colorTextSecondary }}>
+    @import '../styles/mixins.scss';
+    .eyebrow {
+        @include P14Mono;
+        font-size: 16px;
+        color: var(--colorTextSecondary);
+        margin-bottom: 8px;
+    }
+    .heading {
+        @include H56;
+        margin-bottom: 16px;
+    }
+    .subheading {
+        font-size: 20px;
+        max-width: var(--maxSubheadingWidth, 800);
+    }
+    .ctaContainer {
+        display: flex;
+        margin-top: 24px;
+        gap: 16px;
+    }
+</style>

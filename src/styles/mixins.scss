@@ -1,0 +1,221 @@
+@mixin mobile {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 800px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: 1020px) {
+    @content;
+  }
+}
+
+@mixin H96 {
+  font-family: "Inter";
+  font-weight: 500;
+  letter-spacing: -2px;
+  font-size: 96px;
+  line-height: 96px;
+  @include tablet {
+    font-size: 56px;
+    line-height: 64px;
+    letter-spacing: -1px;
+  }
+  @include mobile {
+    font-size: 46px;
+    line-height: 48px;
+  }
+}
+
+@mixin H80 {
+  font-family: "Inter";
+  font-weight: 500;
+  letter-spacing: -2px;
+  font-size: 80px;
+  line-height: 88px;
+  @include tablet {
+    font-size: 56px;
+    line-height: 64px;
+    letter-spacing: -1px;
+  }
+  @include mobile {
+    font-size: 46px;
+    line-height: 48px;
+  }
+}
+
+@mixin H56 {
+  font-family: "Inter";
+  font-weight: 500;
+  letter-spacing: -2.2px;
+  font-size: 56px;
+  line-height: 64px;
+  @include tablet {
+    font-size: 48px;
+    line-height: 56px;
+  }
+  @include mobile {
+    font-size: 34px;
+    line-height: 40px;
+  }
+}
+
+@mixin H40 {
+  font-family: "Inter";
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 48px;
+  @include tablet {
+    font-size: 32px;
+    line-height: 38px;
+  }
+}
+
+@mixin H32 {
+  font-family: "Inter";
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  line-height: 40px;
+  @include tablet {
+    font-size: 28px;
+    line-height: 32px;
+  }
+  @include mobile {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+@mixin H28 {
+  font-family: "Inter";
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  @include tablet {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+@mixin H24 {
+  font-family: "Inter";
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+@mixin H20 {
+  font-family: "Inter";
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 0px;
+}
+
+@mixin H18 {
+  font-family: "Inter";
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0px;
+}
+
+@mixin H16 {
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.6px;
+}
+
+@mixin H14 {
+  font-family: "Inter";
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0px;
+}
+
+@mixin H12 {
+  font-family: "Inter";
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0px;
+}
+
+@mixin P32 {
+  font-family: "Inter";
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 42px;
+  letter-spacing: -1.2px;
+  @include tablet {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -1px;
+  }
+}
+
+@mixin P24 {
+  font-family: "Inter";
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: -1px;
+}
+
+@mixin P20 {
+  font-family: "Inter";
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+@mixin P18 {
+  font-family: "Inter";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+@mixin P16 {
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@mixin P14 {
+  font-family: "Inter";
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+@mixin P12 {
+  font-family: "Inter";
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+@mixin P14Mono {
+  font-family: "Mono";
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 24px;
+  text-transform: uppercase;
+}

@@ -1,15 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Welcome from '../components/Welcome.astro';
-import BaseHeading from '../components/BaseHeading.astro';
+import BaseHeading from '../storybloks/BaseHeading.astro';
 import SliceGrid from '../layouts/SliceGrid.astro';
 import Column from '../layouts/Column.astro';
 import { getLiveStory, useStoryblokApi } from '@storyblok/astro';
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
-
-// const { data } = await storyblokApi.get("cdn/stories/home", {
-//   version: import.meta.env.VITE_ENVIRONMENT ? "draft" : "published",
-// });
 
 // Write a helper for this.
 const { slug } = Astro.params;
@@ -22,29 +17,17 @@ if (liveStory) {
   const sbApi = useStoryblokApi();
   const { data } = await sbApi.get(`cdn/stories/${slug || 'home'}`, {
     version: 'draft',
-    // resolve_relations: ['featured-articles.posts'],
   });
   story = data?.story;
 }
 
 const content = story.content;
+console.log('Content:', content);
 ---
 <Layout>
-	<StoryblokComponent blok={content} />
-	<SliceGrid>
-		<Column>
-			<BaseHeading heading="Think bigger.\nBuild faster." subheading="Figma helps design and development teams build great products, together."
-			maxSubheadingWidth={500}	
-			primaryCta={{label: "Get started for free"}} secondaryCta={{label: "Contact sales"}}
-			/>
-		</Column>
-	</SliceGrid>
+	{
+		content.body?.map((blok) => {
+			return <StoryblokComponent blok={blok} />
+		})
+	}
 </Layout>
-
-<script>
-	document.addEventListener('storyblok-live-preview-updated', () => {
-	  // Here is the callback we could run code every time the body is updated via live preview
-	  console.log('Live preview: body updated');
-	  // Example regenerated all your css
-	});
-	</script>

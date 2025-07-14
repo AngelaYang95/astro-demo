@@ -20,6 +20,7 @@ export default defineConfig({
       bridge: import.meta.env.VITE_ENVIRONMENT === "preview" ? true : false,
       components: {
         ["hero-section"]: "storybloks/HeroSection",
+        ["headline-segment"]: "storybloks/BaseHeading",
         ["page"]: "storybloks/Page",
       },
       apiOptions: {

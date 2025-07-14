@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BaseHeading from '../storybloks/BaseHeading.astro';
+---
+
+<Layout>
+    <div style="padding: 50px;">
+        <h1>Typography Test</h1>
+        <BaseHeading 
+            heading="Test Heading" 
+            subheading="This is a test to see if the H96 typography styles are working correctly."
+        />
+        
+        <div style="margin-top: 50px;">
+            <h2>Direct H96 Test:</h2>
+            <div class="test-heading">This should use H96 styles</div>
+        </div>
+    </div>
+</Layout>
+
+<style lang="scss">
+    @import '../styles/mixins.scss';
+    
+    .test-heading {
+        @include H96;
+        border: 2px solid red;
+        padding: 20px;
+    }
+</style> 
