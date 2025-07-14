@@ -1,5 +1,6 @@
 import React from "react";
 import { lineItem, date, label, activeLineItem } from "./index.css";
+import { storyblokEditable } from "@storyblok/js";
 
 interface ChangelogStory {
   id: number;
@@ -31,6 +32,7 @@ export const ChangelogTable: React.FC<ChangelogTableProps> = ({
       {changelogs.map((changelog, index) => (
         <div key={changelog.id || index}>
           <a
+            {...storyblokEditable(changelog.content)}
             className={
               lineItem + " " + (activeItem === index ? activeLineItem : "")
             }
