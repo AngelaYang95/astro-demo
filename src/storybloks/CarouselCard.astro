@@ -1,0 +1,64 @@
+---
+import { Picture, Image } from 'astro:assets';
+import {Button} from '../components/Button';
+import { storyblokEditable } from '@storyblok/astro'
+
+const { blok } = Astro.props;
+console.log("cover image:", blok.coverImage);
+---
+<a href={blok.slug ?? ""} {...storyblokEditable(blok)}>
+  <div class="card">
+    {blok.coverImage && blok.coverImage.filename && (
+      <div class="cover-image">
+        <img class="img"
+          src={blok.coverImage.filename} 
+          alt={blok.coverImage.alt || blok.title || 'Card image'} 
+          />
+      </div>
+    )}
+    <div class="text-content">
+      {blok.eyebrow && <div class="eyebrow">{blok.eyebrow}</div>}
+      {blok.title && <div class="title">{blok.title}</div>}
+    </div>
+  </div>
+</a>
+  
+<style lang="scss">
+  @import '../styles/mixins.scss';
+  .eyebrow {
+    @include P14Mono;
+  }
+  .title {
+    margin-top: 8px;
+    @include H32;
+  }
+  .text-content {
+    margin-top: 8px;
+    bottom: 48px;
+    left: 48px;
+    position: absolute;
+    max-width: 374px;
+  }
+  .cover-image {
+    object-fit: cover;
+    border-radius: 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .card {
+    position: relative;
+    height: 544px;
+    width: 100%;
+    border-radius: 8px;
+    border: rgba(10, 10, 10, 0.08) solid 1px;
+    background-color: rgba(245, 245, 246, 1);
+  }
+</style>

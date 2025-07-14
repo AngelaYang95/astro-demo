@@ -1,0 +1,11 @@
+---
+const {size = 96} = Astro.props;
+const sizeInPx = `${size}px`;
+---
+<div></div>
+<style define:vars={{ sizeInPx }}>
+    div {
+        height: var(--sizeInPx);
+        width: 100%;
+    }
+</style>

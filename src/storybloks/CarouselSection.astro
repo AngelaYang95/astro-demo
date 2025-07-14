@@ -1,0 +1,33 @@
+---
+import SliceGrid from '../layouts/SliceGrid.astro';
+import { storyblokEditable } from '@storyblok/astro'
+import Column from '../layouts/Column.astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const {blok} = Astro.props;
+---
+<div {...storyblokEditable(blok)}>
+    <SliceGrid>
+    {(blok.title) && <Column gridColumn='1/-1'>
+        {blok.title && <h2 class="heading">{blok.title}</h2>}
+    </Column>}
+    {
+        blok.cards.map((card) => (
+            <Column gridColumn='span 6'>
+                <StoryblokComponent blok={card} />
+            </Column>
+        ))
+    }
+    </SliceGrid>
+</div>
+<style lang="scss">
+    @import '../styles/mixins.scss';
+    .heading {
+        margin-bottom: 16px;
+        @include H40;
+    }
+    .subheading {
+        font-size: 20px;
+        max-width: var(--maxSubheadingWidth, 800);
+    }
+</style>

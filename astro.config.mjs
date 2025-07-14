@@ -5,7 +5,7 @@ import partytown from "@astrojs/partytown";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import { storyblok } from "@storyblok/astro";
 import { loadEnv } from "vite";
-import netlify from "@astrojs/netlify/functions";
+import netlify from "@astrojs/netlify";
 
 const env = loadEnv("", process.cwd(), "STORYBLOK");
 
@@ -21,6 +21,8 @@ export default defineConfig({
       components: {
         ["hero-section"]: "storybloks/HeroSection",
         ["headline-segment"]: "storybloks/BaseHeading",
+        ["carousel-section"]: "storybloks/CarouselSection",
+        ["carousel-card"]: "storybloks/CarouselCard",
         ["page"]: "storybloks/Page",
       },
       apiOptions: {

@@ -1,14 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import BaseHeading from '../storybloks/BaseHeading.astro';
-import SliceGrid from '../layouts/SliceGrid.astro';
-import Column from '../layouts/Column.astro';
 import { getLiveStory, useStoryblokApi } from '@storyblok/astro';
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
+import { ChangelogTable } from '../slices/changelog/ChangelogTable';
+import SliceGrid from '../layouts/SliceGrid.astro';
+import Column from '../layouts/Column.astro';
+import Spacer from '../layouts/Spacer.astro';
 
 // Write a helper for this.
 const { slug } = Astro.params;
 let story = null;
+let changelogs = { data: { stories: [] } };
 
 const liveStory = await getLiveStory(Astro);
 if (liveStory) {
@@ -19,10 +21,15 @@ if (liveStory) {
     version: 'draft',
   });
   story = data?.story;
+  changelogs = await sbApi.get(`cdn/stories/`, {
+	  version: 'draft',
+	  per_page: 2,
+	  page: 1,
+	  content_type: 'changelog-post'
+  });
 }
 
 const content = story.content;
-console.log('Content:', content);
 ---
 <Layout>
 	{
@@ -30,4 +37,11 @@ console.log('Content:', content);
 			return <StoryblokComponent blok={blok} />
 		})
 	}
+	<Spacer />
+	<SliceGrid>
+		<Column gridColumn="1/-1">
+			<ChangelogTable changelogs={changelogs.data.stories} client:load />
+		</Column>
+	</SliceGrid>
+	<Spacer />
 </Layout>
