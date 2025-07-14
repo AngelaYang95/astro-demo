@@ -4,17 +4,30 @@ import Welcome from '../components/Welcome.astro';
 import BaseHeading from '../components/BaseHeading.astro';
 import SliceGrid from '../layouts/SliceGrid.astro';
 import Column from '../layouts/Column.astro';
-import { useStoryblokApi } from '@storyblok/astro'
+import { getLiveStory, useStoryblokApi } from '@storyblok/astro';
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 
-const storyblokApi = useStoryblokApi()
+// const { data } = await storyblokApi.get("cdn/stories/home", {
+//   version: import.meta.env.VITE_ENVIRONMENT ? "draft" : "published",
+// });
 
-const { data } = await storyblokApi.get("cdn/stories/home", {
-  version: import.meta.env.VITE_ENVIRONMENT ? "draft" : "published",
-});
+// Write a helper for this.
+const { slug } = Astro.params;
+let story = null;
 
-console.log(data);
-const content = data.story.content;
+const liveStory = await getLiveStory(Astro);
+if (liveStory) {
+  story = liveStory;
+} else {
+  const sbApi = useStoryblokApi();
+  const { data } = await sbApi.get(`cdn/stories/${slug || 'home'}`, {
+    version: 'draft',
+    // resolve_relations: ['featured-articles.posts'],
+  });
+  story = data?.story;
+}
+
+const content = story.content;
 ---
 <Layout>
 	<StoryblokComponent blok={content} />
@@ -27,3 +40,11 @@ const content = data.story.content;
 		</Column>
 	</SliceGrid>
 </Layout>
+
+<script>
+	document.addEventListener('storyblok-live-preview-updated', () => {
+	  // Here is the callback we could run code every time the body is updated via live preview
+	  console.log('Live preview: body updated');
+	  // Example regenerated all your css
+	});
+	</script>
