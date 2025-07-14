@@ -1,16 +1,18 @@
 ---
-import {Button} from '../components/Button';
+import {Button, type ButtonType} from '../components/Button';
 
 interface Props {
+    eyebrow?: string;
     heading?: string;
     subheading?: string;
-    maxSubheadingWidth: number;
+    maxSubheadingWidth?: number;
     primaryCta?: ButtonType;
     secondaryCta?: ButtonType;
 }
 
-const {heading, subheading, maxSubheadingWidth, primaryCta, secondaryCta} = Astro.props;
+const {eyebrow, heading, subheading, maxSubheadingWidth = 800, primaryCta, secondaryCta} = Astro.props;
 ---
+{eyebrow && <span class="eyebrow">{eyebrow}</span>}
 {heading && <h2 class="heading">{heading}</h2>}
 {subheading && <p class="subheading">{subheading}</p>}
 <div class="ctaContainer">
@@ -19,8 +21,12 @@ const {heading, subheading, maxSubheadingWidth, primaryCta, secondaryCta} = Astr
 </div>
 
 <style define:vars={{ maxSubheadingWidth }}>
+    .eyebrow {
+        font-size: 16px;
+        color: var(--color-text-secondary);
+        margin-bottom: 8px;
+    }
     .heading {
-        white-space: pre;
         font-size: 48px;
         margin-bottom: 16px;
     }
