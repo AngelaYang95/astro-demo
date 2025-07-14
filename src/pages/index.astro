@@ -4,16 +4,16 @@ import Welcome from '../components/Welcome.astro';
 import BaseHeading from '../components/BaseHeading.astro';
 import SliceGrid from '../layouts/SliceGrid.astro';
 import Column from '../layouts/Column.astro';
-import {Button} from '../components/Button';
 import { useStoryblokApi } from '@storyblok/astro'
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 
 const storyblokApi = useStoryblokApi()
 
-const { data } = await storyblokApi.get("cdn/stories/demo", {
+const { data } = await storyblokApi.get("cdn/stories/home", {
   version: import.meta.env.VITE_ENVIRONMENT ? "draft" : "published",
 });
 
+console.log(data);
 const content = data.story.content;
 ---
 <Layout>

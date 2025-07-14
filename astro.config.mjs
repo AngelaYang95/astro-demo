@@ -20,7 +20,7 @@ export default defineConfig({
       bridge: import.meta.env.VITE_ENVIRONMENT === "preview" ? true : false,
       components: {
         ["hero-section"]: "storybloks/HeroSection",
-        ["default-page"]: "storybloks/Page",
+        ["page"]: "storybloks/Page",
       },
       apiOptions: {
         region: "eu",
