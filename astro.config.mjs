@@ -17,7 +17,7 @@ export default defineConfig({
     storyblok({
       accessToken: env.STORYBLOK_TOKEN,
       livePreview: true,
-      bridge: true,
+      bridge: import.meta.env.VITE_ENVIRONMENT === "preview" ? true : false,
       components: {
         ["hero-section"]: "storybloks/HeroSection",
         ["default-page"]: "storybloks/Page",
@@ -28,7 +28,7 @@ export default defineConfig({
     }),
   ],
   adapter: netlify({}),
-  output: "server",
+  output: import.meta.env.VITE_ENVIRONMENT === "preview" ? "server" : "static",
   vite: {
     plugins: [vanillaExtractPlugin()],
   },
